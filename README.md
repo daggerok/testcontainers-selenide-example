@@ -1,5 +1,5 @@
 # testcontainers-selenide-example [![Build Status](https://travis-ci.org/daggerok/testcontainers-selenide-example.svg?branch=master)](https://travis-ci.org/daggerok/testcontainers-selenide-example)
-E2E testing infrastructure simplified: run Selenide browser test using remote web driver either chrome or firefox with 
+E2E testing infrastructure simplified: run Selenide browser tests using remote web driver either chrome or firefox with 
 Gradle, Maven, Docker and TestContainers!
 
 __requires Docker up and running!__
