@@ -47,37 +47,27 @@ lombok {
   version = lombokVersion
 }
 
-val selenideVersion: String by project
-val testcontainersVersion: String by project
-
-val slf4jVersion: String by project
-val logbackVersion: String by project
-val junit4Version: String by project
-val assertkVersion: String by project
-val assertjVersion: String by project
-val junitJupiterVersion: String by project
-
 dependencies {
   implementation(kotlin("stdlib"))
   implementation(kotlin("reflect"))
 
   implementation("io.vavr:vavr:0.10.0")
-  implementation("org.slf4j:slf4j-api:$slf4jVersion")
-  implementation("ch.qos.logback:logback-classic:$logbackVersion")
+  implementation("org.slf4j:slf4j-api:1.7.26")
+  implementation("ch.qos.logback:logback-classic:1.2.3")
   annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
-  testImplementation("com.codeborne:selenide:$selenideVersion")
-  testImplementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
+  testImplementation("com.codeborne:selenide:5.2.2")
+  testImplementation(platform("org.testcontainers:testcontainers-bom:1.11.1"))
   testImplementation("org.testcontainers:selenium")
   testImplementation("org.testcontainers:junit-jupiter")
-  testImplementation(platform("org.junit:junit-bom:$junitJupiterVersion"))
+  testImplementation(platform("org.junit:junit-bom:5.5.0-M1"))
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
   testRuntime("org.junit.platform:junit-platform-launcher")
   testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
-  testImplementation("junit:junit:$junit4Version")
-  testImplementation("com.willowtreeapps.assertk:assertk-jvm:$assertkVersion")
-  testImplementation("org.assertj:assertj-core:$assertjVersion")
+  testImplementation("junit:junit:4.12")
+  testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.13")
+  testImplementation("org.assertj:assertj-core:3.12.2")
 }
 
 tasks.withType<Test> {
