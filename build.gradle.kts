@@ -3,7 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
   java
-  application
   kotlin("jvm") version "1.3.21"
   kotlin("plugin.spring") version "1.3.21"
   id("io.franzbecker.gradle-lombok") version "2.1"
@@ -88,12 +87,6 @@ dependencies {
   testImplementation("org.assertj:assertj-core:$assertjVersion")
 }
 
-val mainClass: String by project
-
-application {
-  mainClassName = mainClass
-}
-
 tasks.withType<Test> {
   useJUnitPlatform()
   testLogging {
@@ -101,41 +94,6 @@ tasks.withType<Test> {
     showStandardStreams = true
     events(PASSED, SKIPPED, FAILED)
   }
-}
-
-tasks {
-  register("fatJar", Jar::class.java) {
-    //archiveAppendix.set("all")
-    archiveClassifier.set("all")
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-      attributes("Main-Class" to mainClass)
-    }
-    from(configurations.runtimeClasspath.get()
-        .onEach { println("add from dependencies: ${it.name}") }
-        .map { if (it.isDirectory) it else zipTree(it) })
-    val sourcesMain = sourceSets.main.get()
-    sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
-    from(sourcesMain.output)
-  }
-}
-
-tasks.create<Zip>("sources") {
-  dependsOn("clean")
-  shouldRunAfter("clean", "assemble")
-  description = "Archives sources in a zip file"
-  group = "Archive"
-  from("src") {
-    into("src")
-  }
-  from(".gitignore")
-  from(".java-version")
-  from(".travis.yml")
-  from("build.gradle.kts")
-  from("pom.xml")
-  from("README.md")
-  from("settings.gradle.kts")
-  archiveFileName.set("${project.buildDir}/sources-${project.version}.zip")
 }
 
 tasks {
