@@ -9,8 +9,7 @@ plugins {
 }
 
 tasks.withType(Wrapper::class.java) {
-  val gradleWrapperVersion: String by project
-  gradleVersion = gradleWrapperVersion
+  gradleVersion = "5.4-rc-1"
   distributionType = Wrapper.DistributionType.BIN
 }
 
