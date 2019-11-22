@@ -59,6 +59,9 @@ jobs:
       jdk: openjdk8
       name: mvn updates openjdk8
       script: ./mvnw versions:display-property-updates
+before_cache:
+  - find ~/.gradle -name "fileHashes.bin" -print0 | xargs -0 rm -rfv '{}'
+  - for item in $(find ~/.gradle -name "*.lock") ; do rm -rfv $item ; done
 cache:
   npm: true
   pip: true
