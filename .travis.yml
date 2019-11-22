@@ -50,6 +50,15 @@ jobs:
       name: gradle openjdk8
       before_script: cp -Rf src/main/resources/logback-gradle.xml src/main/resources/logback.xml
       script: ./gradlew
+    - stage: test
+      jdk: openjdk11
+      name: gradle updates openjdk11
+      before_script: cp -Rf src/main/resources/logback-gradle.xml src/main/resources/logback.xml
+      script: ./gradlew dependencyUpdates -Drevision=release
+    - stage: test
+      jdk: openjdk8
+      name: mvn updates openjdk8
+      script: ./mvnw versions:display-property-updates
 cache:
   npm: true
   pip: true
