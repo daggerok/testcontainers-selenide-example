@@ -43,10 +43,12 @@ jobs:
     - stage: test
       jdk: openjdk11
       name: gradle openjdk11
+      before_script: cp -Rf src/main/resources/logback-gradle.xml src/main/resources/logback.xml
       script: ./gradlew
     - stage: test
       jdk: openjdk8
       name: gradle openjdk8
+      before_script: cp -Rf src/main/resources/logback-gradle.xml src/main/resources/logback.xml
       script: ./gradlew
 cache:
   npm: true

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -34,6 +36,8 @@ class JunitJupiterTests {
   static final Path path = Paths.get(".", outputDir);
   static final Capabilities capabilities = System.currentTimeMillis() % 2 == 0
       ? new ChromeOptions() : new FirefoxOptions();
+  // static final Capabilities capabilities = System.currentTimeMillis() % 2 == 0
+  //         ? DesiredCapabilities.chrome() : DesiredCapabilities.firefox();
 
   @Container // 3: Use @Container instead of @Rule
   static final BrowserWebDriverContainer browser = new BrowserWebDriverContainer()
@@ -51,11 +55,13 @@ class JunitJupiterTests {
       should_google_search_and_wait_for("Порошенко педофил?"); // ru
       should_google_search_and_wait_for("is Poroshenko pedofile?"); // en
     }
+    WebDriverRunner.closeWebDriver();
   }
 
   private void should_google_search_and_wait_for(String query) {
     // create selenide driver from existing one - remote Chrome WebDriver, pointing of docker test container:
-    WebDriverRunner.setWebDriver(browser.getWebDriver());
+    RemoteWebDriver remoteWebDriver = browser.getWebDriver();
+    WebDriverRunner.setWebDriver(remoteWebDriver);
     // regular Selenide test:
     Selenide.open("https://google.com?q=" + query);
     $$("form").filterBy(exist).first().shouldBe(visible).submit();

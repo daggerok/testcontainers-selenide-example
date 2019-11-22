@@ -18,6 +18,7 @@ __requires Docker up and running!__
 
 _resources_
 
-[GitHub: selenide-examples](https://github.com/selenide-examples/testcontainers)
-[ru guide](http://automation-remarks.com/ganiaitie-tiesty-v-kontieinierie-s-testcontainers/)
-[Junit Jupiter + TestContainers](https://www.testcontainers.org/test_framework_integration/junit_5/)
+* https://github.com/selenide-examples/testcontainers/blob/master/src/test/java/org/selenide/examples/GoogleTestWithDocker.java
+* [GitHub: selenide-examples](https://github.com/selenide-examples/testcontainers)
+* [ru guide](http://automation-remarks.com/ganiaitie-tiesty-v-kontieinierie-s-testcontainers/)
+* [Junit Jupiter + TestContainers](https://www.testcontainers.org/test_framework_integration/junit_5/)
