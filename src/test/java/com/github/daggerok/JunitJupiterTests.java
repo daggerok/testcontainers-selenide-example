@@ -52,10 +52,10 @@ class JunitJupiterTests {
   @Test
   void main() {
     for (int i = 0; i < 10; i++) {
-      should_google_search_and_wait_for("Порошенко педофил?"); // ru
-      should_google_search_and_wait_for("is Poroshenko pedofile?"); // en
+      should_google_search_and_wait_for("ололо"); // ru
+      should_google_search_and_wait_for("trololo"); // en
     }
-    WebDriverRunner.closeWebDriver();
+    // WebDriverRunner.closeWebDriver(); // should I do that?
   }
 
   private void should_google_search_and_wait_for(String query) {

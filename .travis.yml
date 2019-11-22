@@ -68,4 +68,5 @@ cache:
   packages: true
   directories:
     - ~/.m2
+    - ~/.docker
     - ~/.local/daggerok
