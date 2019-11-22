@@ -1,17 +1,57 @@
+notifications:
+  email: false
+git:
+  quiet: true
+  depth: false
 language: java
 jdk: openjdk8
-sudo: required
-services: docker
+node_js: lts/*
+python: 3.7
+os: linux
+addons:
+  apt:
+    update: true
+    packages:
+      - python3-setuptools
+      - python3-pip
+      - sudo
+      - lsof
+      - curl
 install: true
-apt_packages:
-  - docker-ce
-  - bash
-script:
-  - ./gradlew clean test
-  - ./mvnw clean test
+before_install:
+  - |
+    if [ ! -f ${HOME}/.local/daggerok/bash-functions/master/main.bash ] ; then
+      mkdir -p ${HOME}/.local/daggerok/bash-functions/master ;
+      curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash > ${HOME}/.local/daggerok/bash-functions/master/main.bash ;
+    fi
+    source ${HOME}/.local/daggerok/bash-functions/master/main.bash ;
+  - stop_any 80 5432 8080 8081 8082 8083 8084 8085 8086 8087 8088
+  #
+  - export PATH=$HOME/.local/bin:$PATH
+  - pip3 install --user --upgrade pip
+  - pip install --user --upgrade httpie
+jobs:
+  include:
+    - stage: test
+      jdk: openjdk11
+      name: mvn openjdk11
+      script: ./mvnw
+    - stage: test
+      jdk: openjdk8
+      name: mvn openjdk8
+      script: ./mvnw
+    - stage: test
+      jdk: openjdk11
+      name: gradle openjdk11
+      script: ./gradlew
+    - stage: test
+      jdk: openjdk8
+      name: gradle openjdk8
+      script: ./gradlew
 cache:
-  directories:
-    - ~/.docker
-    - ~/.gradle
-    - ~/.m2
+  npm: true
+  pip: true
   packages: true
+  directories:
+    - ~/.m2
+    - ~/.local/daggerok

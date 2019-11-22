@@ -50,7 +50,7 @@ dependencies {
   implementation(kotlin("stdlib"))
   implementation(kotlin("reflect"))
 
-  implementation("io.vavr:vavr:0.10.0")
+  implementation("io.vavr:vavr:0.10.2")
   implementation("org.slf4j:slf4j-api:1.7.26")
   implementation("ch.qos.logback:logback-classic:1.2.3")
   annotationProcessor("org.projectlombok:lombok:$lombokVersion")
@@ -89,4 +89,4 @@ tasks {
   }
 }
 
-defaultTasks("clean", "sources", "fatJar", "installDist")
+defaultTasks("test")
