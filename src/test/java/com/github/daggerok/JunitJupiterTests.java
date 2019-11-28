@@ -51,7 +51,7 @@ class JunitJupiterTests {
 
   @Test
   void main() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 2; i++) {
       should_google_search_and_wait_for("ололо"); // ru
       should_google_search_and_wait_for("trololo"); // en
     }

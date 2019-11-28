@@ -50,7 +50,7 @@ public class Junit4Tests {
 
   @Test
   public void main() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
       should_google_search_and_wait_for("не дорог подарок, как дорого внимание, оценивать сколько бы я была готова подарок"); // ru
       should_google_search_and_wait_for("Billy Bob Thornton"); // en
     }
