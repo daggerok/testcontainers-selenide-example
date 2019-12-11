@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -65,6 +66,10 @@ public class Junit4Tests {
     Selenide.open("?q=" + query);
     $$("form").filterBy(exist).first().shouldBe(visible).submit();
     $(byValue(query)).shouldBe(exist).shouldBe(visible).submit();
+  }
+
+  @AfterClass
+  public static void afterAll() {
     // Warning: at this point if time Selenide will also stops Chrome remote WebDriver too...
     Selenide.close();
   }

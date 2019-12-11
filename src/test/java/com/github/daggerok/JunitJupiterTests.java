@@ -2,6 +2,7 @@ package com.github.daggerok;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Capabilities;
@@ -66,6 +67,10 @@ class JunitJupiterTests {
     Selenide.open("https://google.com?q=" + query);
     $$("form").filterBy(exist).first().shouldBe(visible).submit();
     $(byValue(query)).shouldBe(exist).shouldBe(visible).submit();
+  }
+
+  @AfterAll
+  static void afterAll() {
     // Warning: at this point if time Selenide will also stops Chrome remote WebDriver too...
     Selenide.close();
   }

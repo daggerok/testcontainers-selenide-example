@@ -56,8 +56,7 @@ dependencies {
   implementation("ch.qos.logback:logback-classic:1.3.0-alpha5")
   annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
-  // testImplementation("com.codeborne:selenide:5.5.0")
-  testImplementation("com.codeborne:selenide:5.2.8") // 5.3.+ doesn't worked...
+  testImplementation("com.codeborne:selenide:5.5.0")
   testImplementation(platform("org.testcontainers:testcontainers-bom:1.12.3"))
   testImplementation("org.testcontainers:selenium")
   testImplementation("org.testcontainers:junit-jupiter")
