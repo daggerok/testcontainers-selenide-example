@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -72,6 +71,7 @@ class JunitJupiterTests {
   @AfterAll
   static void afterAll() {
     // Warning: at this point if time Selenide will also stops Chrome remote WebDriver too...
-    Selenide.close();
+    Selenide.closeWindow();
+    Selenide.closeWebDriver();
   }
 }

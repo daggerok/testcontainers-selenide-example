@@ -1,0 +1,20 @@
+name: CI
+on: [push]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      #- uses: graalvm/setup-graalvm@v1
+      #  with:
+      #    java-version: '22'      # See 'Options' section below for all supported versions
+      #    distribution: 'graalvm' # See 'Options' section below for all available distributions
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '8'        # See supported versions https://github.com/actions/setup-java?tab=readme-ov-file#supported-version-syntax
+          distribution: 'corretto' # See the section below for all available distributions https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
+      - run: |
+          echo "JAVA_HOME: $JAVA_HOME"
+          java -version
+      - run: ./mvnw
