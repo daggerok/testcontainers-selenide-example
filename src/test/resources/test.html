@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Buzz Banner Preview</title>
+  <style>
+    .bw-center-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bw-center {
+      align-self: center;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0;">
+<script type='text/javascript'>
+  /**
+   * This code is needed for Creative V2 banner preview
+   * Sends specific message to parent (main page) each time banner is clicked
+   */
+  (function () {
+    window.addEventListener('load', () => {
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', () => {
+          window.parent.postMessage('bannerClick', '*')
+        })
+      })
+    })
+  })()
+</script>
+<div class="bw-center-wrap">
+  <div class="bw-center">
+    <div id='beeswax-ad-wrapper' style='position: relative;'><img src="https://s3.amazonaws.com/buzz-creative-assets/0.gif" style="position: absolute;" width='0' height='0'><ins class='dcmads' style='display:inline-block;width:300px;height:600px'
+                                                                                                                                                                                  data-dcm-placement='N801132.4109095GENIUSSPORTS/B33174615.413566054'
+                                                                                                                                                                                  data-dcm-rendering-mode='iframe'
+                                                                                                                                                                                  data-dcm-https-only
+                                                                                                                                                                                  data-dcm-api-frameworks='[APIFRAMEWORKS]'
+                                                                                                                                                                                  data-dcm-omid-partner='[OMIDPARTNER]'
+                                                                                                                                                                                  data-dcm-gdpr-applies='gdpr=${GDPR}'
+                                                                                                                                                                                  data-dcm-gdpr-consent='gdpr_consent=${GDPR_CONSENT_755}'
+                                                                                                                                                                                  data-dcm-addtl-consent='addtl_consent=${ADDTL_CONSENT}'
+                                                                                                                                                                                  data-dcm-ltd='false'
+                                                                                                                                                                                  data-dcm-resettable-device-id=''
+                                                                                                                                                                                  data-dcm-app-id='' data-dcm-click-tracker='[click][/click]'>
+      <script src='https://www.googletagservices.com/dcm/dcmads.js'></script>
+    </ins></div>
+  </div>
+</div>
+</body>
+</html>

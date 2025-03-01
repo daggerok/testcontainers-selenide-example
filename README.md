@@ -10,12 +10,6 @@ __requires Docker up and running!__
 ./mvnw clean test
 ```
 
-## gradle
-
-```bash
-./gradlew clean test
-```
-
 _resources_
 
 * https://github.com/selenide-examples/testcontainers/blob/master/src/test/java/org/selenide/examples/GoogleTestWithDocker.java
