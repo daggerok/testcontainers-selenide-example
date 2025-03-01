@@ -2,6 +2,7 @@ package com.github.daggerok;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordi
 
 // 1: Add required dependency: org.testcontainers:junit-jupiter
 // 2: Add class level annotation:
+@Slf4j
 @Testcontainers
 class JunitJupiterTests {
 
@@ -49,29 +51,67 @@ class JunitJupiterTests {
     if (Files.notExists(path)) path.toFile().mkdirs();
   }
 
-  @Test
+  // @Test // Google Captcha is blocking a test...
   void main() {
-    for (int i = 0; i < 2; i++) {
-      should_google_search_and_wait_for("ололо"); // ru
-      should_google_search_and_wait_for("trololo"); // en
-    }
+    should_google_search_and_wait_for("DonaldTrump");
     // WebDriverRunner.closeWebDriver(); // should I do that?
   }
 
   private void should_google_search_and_wait_for(String query) {
+    // // WebDriverRunner.setWebDriver(new org.openqa.selenium.firefox.FirefoxDriver());
     // create selenide driver from existing one - remote Chrome WebDriver, pointing of docker test container:
+    log.info("RemoteWebDriver remoteWebDriver = browser.getWebDriver();");
     RemoteWebDriver remoteWebDriver = browser.getWebDriver();
+    log.info("WebDriverRunner.setWebDriver(remoteWebDriver);");
     WebDriverRunner.setWebDriver(remoteWebDriver);
+
+    // base project dir
+    String baseDir = System.getProperty("user.dir");
+    log.info("baseDir: {}", baseDir);
+
     // regular Selenide test:
+    log.info("Selenide.open('https://google.com?q={}')", query);
     Selenide.open("https://google.com?q=" + query);
-    $$("form").filterBy(exist).first().shouldBe(visible).submit();
-    $(byValue(query)).shouldBe(exist).shouldBe(visible).submit();
+
+    // Selenide.screenshot(String.format("%s/target/google-search-and-wait-for-ololo-screenshot-1.png", baseDir));
+    Selenide.screenshot("../../../target/google-search-and-wait-for-ololo-screenshot-1.png");
+
+    log.info("$('form[action='/search']').shouldBe(exist).shouldBe(visible).submit();");
+    $("form[action='/search']").shouldBe(exist).shouldBe(visible).submit();
+    // Selenide.screenshot(String.format("%s/target/google-search-and-wait-for-ololo-screenshot-2.png", baseDir));
+    Selenide.screenshot("../../../target/google-search-and-wait-for-ololo-screenshot-2.png");
+
+    // log.info("$(byValue(query)).shouldBe(exist).shouldBe(visible).submit();");
+    // $(byValue(query)).shouldBe(exist).shouldBe(visible).submit();
+    // // Selenide.screenshot(String.format("%s/target/google-search-and-wait-for-ololo-screenshot-3.png", baseDir));
+    // Selenide.screenshot("../../../target/google-search-and-wait-for-ololo-screenshot-3.png");
+  }
+
+  @Test
+  void should_test_html() {
+    // WebDriverRunner.setWebDriver(new org.openqa.selenium.firefox.FirefoxDriver());
+    // create selenide driver from existing one - remote Chrome WebDriver, pointing of docker test container:
+    log.info("RemoteWebDriver remoteWebDriver = browser.getWebDriver();");
+    RemoteWebDriver remoteWebDriver = browser.getWebDriver();
+    log.info("WebDriverRunner.setWebDriver(remoteWebDriver);");
+    WebDriverRunner.setWebDriver(remoteWebDriver);
+
+    // base project dir
+    String baseDir = System.getProperty("user.dir");
+    log.info("baseDir: {}", baseDir);
+
+    // Selenide
+    log.info("Selenide.open('{}/src/test/resources/test.html')", baseDir);
+    Selenide.open(String.format("file://%s/src/test/resources/test.html", baseDir));
+    Selenide.screenshot("../../../target/should-test-html-1.png");
   }
 
   @AfterAll
   static void afterAll() {
     // Warning: at this point if time Selenide will also stops Chrome remote WebDriver too...
+    log.info("Selenide.closeWindow();");
     Selenide.closeWindow();
+    log.info("Selenide.closeWebDriver();");
     Selenide.closeWebDriver();
   }
 }

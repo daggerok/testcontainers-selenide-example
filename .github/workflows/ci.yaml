@@ -17,4 +17,9 @@ jobs:
       - run: |
           echo "JAVA_HOME: $JAVA_HOME"
           java -version
-      - run: ./mvnw
+      - run: docker pull -q alpine:3.17
+      - run: docker pull -q testcontainers/ryuk:0.11.0
+      - run: docker pull -q testcontainers/vnc-recorder:1.3.0
+      - run: docker pull -q selenium/standalone-firefox:4.13.0
+      - run: ./mvnw clean ; ./mvnw test --no-transfer-progress
+      - run: ls -lah ./target/
